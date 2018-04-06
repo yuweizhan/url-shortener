@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html data-ng-app="app" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortener</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body data-ng-controller="mainController">
+    <form>
+        <input type="text" placeholder="URL to shorten" data-ng-model="formData.url"/>
+        <input type="submit" value="Submit" data-ng-click="shortenUrl()">
+        <h1>{{ urlObj.url }}</h1>
+    </form>
+</body>
+</html>
