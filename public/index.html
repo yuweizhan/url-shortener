@@ -8,9 +8,9 @@
 </head>
 <body data-ng-controller="mainController">
     <form>
-        <input type="text" placeholder="URL to shorten" data-ng-model="formData.url"/>
+        <input type="text" placeholder="URL to shorten" data-ng-model="long"/>
         <input type="submit" value="Submit" data-ng-click="shortenUrl()">
-        <h1>{{ urlObj.url }}</h1>
+        <h1>{{ short }}</h1>
     </form>
 </body>
 </html>
