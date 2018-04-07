@@ -1,14 +1,22 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+
 const _ = require('underscore');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const os = require('os');
+const path = require('path');
+
+const PORT = 3000;
 
 app.use(express.static('public'));
+app.use('/angular', express.static('node_modules/angular/'));
+app.use('/angular-clipboard', express.static('node_modules/angular-clipboard/'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': true}));
 
+// TODO: hide credentials
 mongoose.connect('mongodb://admin:admin@ds135399.mlab.com:35399/url-shortener');
 
 const Url = mongoose.model('Url', {
@@ -17,26 +25,29 @@ const Url = mongoose.model('Url', {
     short: String
 });
 
+app.get('/api/domain', (req, res) => {
+    res.json({ domain: 'http://' + os.hostname() + ':' + PORT });
+});
+
 app.post('/api/urls', (req, res) => {
-    Url.findOne(
-        {},
-        null,
-        {
-            sort: {
-                id: -1
-            }    
-        },
-        (err, obj) => {
-            if (err) {
-                res.send(err);
-            }
-            
-            if (!_.isNull(obj)) {
-                maxId = obj.id;
+    const long = req.body.long;
+
+    Url.findOne({ long: long }, (err, obj) => {
+        if (err) {
+            res.send(err);
+        }
+
+        if (_.isNull(obj)) {
+            Url.findOne({}, null, { sort: { id: -1 } }, (err, obj) => {
+                if (err) {
+                    res.send(err);
+                }
+
+                const maxId = _.isNull(obj) ? 0 : obj.id;
 
                 Url.create({
                     id: maxId + 1,
-                    long: req.body.long,
+                    long: long,
                     short: hash(maxId + 1)
                 }, (err, obj) => {
                     if (err) {
@@ -45,26 +56,33 @@ app.post('/api/urls', (req, res) => {
 
                     res.json(obj);
                 });
-            }
+            });
+        } else {
+            res.json(obj);
         }
-    );
+    });
 });
 
-app.get('/api/url/:short', (req, res) => {
-    Url.findOne({short: req.params.short}, (err, obj) => {
+const root = __dirname + '/public/';
+app.get('/', (req, res) => {
+    res.sendFile(path.join(root + 'index.html'));
+});
+
+app.get('/:short', (req, res) => {
+    Url.findOne({ short: req.params.short }, (err, obj) => {
         if (err) {
             res.send(err);
         }
 
-        res.json(obj);
+        if (!_.isNull(obj)) {
+            res.redirect(obj.long);
+        } else {
+            res.sendFile(path.join(root + 'error.html'));
+        }
     });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
-});
-
-app.listen(3000);
+app.listen(PORT);
 
 function hash(id) {
     const digits = [];
