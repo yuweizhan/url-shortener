@@ -1,17 +1,10 @@
 const app = angular.module('app', ['angular-clipboard']);
 
-app.controller('mainController', ($scope, $http) => {
-    $scope.domain = "";
+app.controller('mainController', ($scope, $http, $location) => {
+    $scope.domain = $location.protocol() + "://" + $location.host() + ":" + $location.port();
     $scope.long = "";
     $scope.short = "";
     $scope.copied = false;
-
-    $http.get('/api/domain')
-        .then((response) => {
-            $scope.domain = response.data.domain;
-        }, (err) => {
-            // Intentionally blank
-        });
 
     $scope.shortenUrl = () => {
         $scope.copied = false;

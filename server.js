@@ -4,10 +4,7 @@ const app = express();
 const _ = require('underscore');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const os = require('os');
 const path = require('path');
-
-const PORT = 3000;
 
 app.use(express.static('public'));
 app.use('/angular', express.static('node_modules/angular/'));
@@ -23,10 +20,6 @@ const Url = mongoose.model('Url', {
     id: Number,
     long: String,
     short: String
-});
-
-app.get('/api/domain', (req, res) => {
-    res.json({ domain: 'http://' + os.hostname() + ':' + PORT });
 });
 
 app.post('/api/urls', (req, res) => {
@@ -82,6 +75,7 @@ app.get('/:short', (req, res) => {
     });
 });
 
+const PORT = 3000 | process.argv[2];
 app.listen(PORT);
 
 function hash(id) {
