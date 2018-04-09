@@ -13,10 +13,9 @@ app.use('/angular-clipboard', express.static('node_modules/angular-clipboard/'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': true}));
 
-// TODO: hide credentials
-mongoose.connect('mongodb://admin:admin@ds135399.mlab.com:35399/url-shortener');
+mongoose.connect('mongodb://localhost/url-shortener');
 
-const Url = mongoose.model('Url', {
+const Url = mongoose.model('url', {
     id: Number,
     long: String,
     short: String
