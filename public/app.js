@@ -1,7 +1,6 @@
 const app = angular.module('app', ['angular-clipboard']);
 
 app.controller('mainController', ($scope, $http, $location) => {
-    $scope.domain = $location.protocol() + "://" + $location.host() + ":" + $location.port();
     $scope.long = "";
     $scope.short = "";
     $scope.copied = false;
@@ -14,9 +13,9 @@ app.controller('mainController', ($scope, $http, $location) => {
             return;
         }
 
-        $http.post('/api/urls', { long: $scope.long })
+        $http.post('api/urls', { long: $scope.long })
             .then((response) => {
-                $scope.short = $scope.domain + "/" + response.data.short;
+                $scope.short = $location.absUrl() + response.data.short;
             }, (err) => {
                 // Intentionally blank
             });
