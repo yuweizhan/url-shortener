@@ -12,7 +12,7 @@
 </head>
 <body data-ng-controller="mainController">
     <section class="section">
-        <h1 class="title">URL Shortener</h1>
+        <h1 class="title is-1">URL Shortener</h1>
     </section>
     <section class="secion">
         <form class="container">
@@ -22,16 +22,18 @@
                 </div>
             </div>
             <div class="field">
-                <div class="control button-field">
+                <div class="control button-control">
                     <button class="button is-primary" data-ng-click="shortenUrl()">Shorten!</button>
                 </div>
             </div>
         </form>
     </section>
-    <section class="container" data-ng-show="short !== ''">
-        <span>Shortened URL: <a href="{{ short }}" target="_blank">{{ short }}</a></span>
-        <button clipboard text="short" on-copied="copySuccess()" on-error="copyErr(err)">Copy</button>
-        <span data-ng-show="copied === true">Copied!</span>
+    <section class="section" data-ng-show="short !== ''">
+        <div class="container short-container">
+            <span>Shortened URL: <a href="{{ short }}" target="_blank">{{ short }}</a></span>
+            <button class="button is-link" clipboard text="short" on-copied="copySuccess()" on-error="copyErr(err)">Copy</button>
+            <span data-ng-show="copied === true">Copied!</span>
+        </div>
     </section>
 </body>
 </html>

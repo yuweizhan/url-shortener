@@ -1,7 +1,3 @@
-h1 {
-    text-align: center;
-}
-
-.button-field {
+h1, h4, .button-control, .short-container {
     text-align: center;
 }
