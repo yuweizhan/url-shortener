@@ -2,20 +2,36 @@
 <html data-ng-app="app" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>URL Shortener</title>
     <script src="./angular/angular.js"></script>
     <script src="./angular-clipboard/angular-clipboard.js"></script>
     <script src="./app.js"></script>
+    <link rel="stylesheet" href="./bulma/css/bulma.css">
+    <link rel="stylesheet" href="./app.css">
 </head>
 <body data-ng-controller="mainController">
-    <form>
-        <input type="text" placeholder="URL to shorten" data-ng-model="long"/>
-        <input type="submit" value="Submit" data-ng-click="shortenUrl()">
-        <div data-ng-show="short !== ''">
-            <span>Shortened URL: <a href="{{ short }}" target="_blank">{{ short }}</a></span>
-            <button clipboard text="short" on-copied="copySuccess()" on-error="copyErr(err)">Copy</button>
-            <span data-ng-show="copied === true">Copied!</span>
-        </div>
-    </form>
+    <section class="section">
+        <h1 class="title">URL Shortener</h1>
+    </section>
+    <section class="secion">
+        <form class="container">
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" placeholder="URL to shorten" data-ng-model="long"/>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control button-field">
+                    <button class="button is-primary" data-ng-click="shortenUrl()">Shorten!</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="container" data-ng-show="short !== ''">
+        <span>Shortened URL: <a href="{{ short }}" target="_blank">{{ short }}</a></span>
+        <button clipboard text="short" on-copied="copySuccess()" on-error="copyErr(err)">Copy</button>
+        <span data-ng-show="copied === true">Copied!</span>
+    </section>
 </body>
 </html>

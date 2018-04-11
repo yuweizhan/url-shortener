@@ -9,6 +9,7 @@ const path = require('path');
 app.use(express.static('public'));
 app.use('/angular', express.static('node_modules/angular/'));
 app.use('/angular-clipboard', express.static('node_modules/angular-clipboard/'));
+app.use('/bulma', express.static('node_modules/bulma'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': true}));
