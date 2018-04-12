@@ -2,7 +2,7 @@
   "name": "url-shortener",
   "version": "0.0.1",
   "description": "A fully-functional URL Shortener written in the MEAN (Mongo, Express, Angular, Node) stack.",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

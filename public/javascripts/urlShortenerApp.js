@@ -1,4 +1,4 @@
-const app = angular.module('app', ['angular-clipboard']);
+const app = angular.module('urlShortener', ['angular-clipboard']);
 
 app.controller('mainController', ($scope, $http, $location) => {
     $scope.long = "";
@@ -21,11 +21,11 @@ app.controller('mainController', ($scope, $http, $location) => {
             });
     };
 
-    $scope.copySuccess = function () {
+    $scope.copySuccess = () => {
         $scope.copied = true;
     };
 
-    $scope.copyErr = function (err) {
+    $scope.copyErr = (err) => {
         // Intentionally blank
     };
 });
