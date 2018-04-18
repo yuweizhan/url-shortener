@@ -5,8 +5,10 @@ const _ = require("underscore");
 
 const Url = require("../models/url");
 
+const publicRoot = `${__dirname}/../public/`;
+
 router.get('/', (req, res) => {
-    res.sendFile(path.join(root + '../public/index.html'));
+    res.sendFile(path.join(publicRoot, 'index.html'));
 });
 
 router.get('/:short', (req, res) => {
@@ -18,7 +20,7 @@ router.get('/:short', (req, res) => {
         if (!_.isNull(obj)) {
             res.redirect(obj.long);
         } else {
-            res.sendFile(path.join(root + 'error.html'));
+            res.sendFile(path.join(publicRoot, 'error.html'));
         }
     });
 });

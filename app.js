@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 
-const _ = require('underscore');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
