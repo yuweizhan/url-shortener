@@ -6,8 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuweizhan/url-shortener.git"
+  },
   "author": "Yuwei Zhan",
   "license": "",
+  "bugs": {
+    "url": "https://github.com/yuweizhan/url-shortener/issues"
+  },
+  "homepage": "https://github.com/yuweizhan/url-shortener#readme",
   "dependencies": {
     "angular": "^1.6.9",
     "angular-clipboard": "^1.6.2",
