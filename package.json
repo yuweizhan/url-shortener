@@ -23,6 +23,6 @@
     "bulma": "^0.6.2",
     "express": "^4.16.3",
     "mongoose": "^5.0.13",
-    "underscore": "^1.8.3"
+    "underscore": "^1.12.1"
   }
 }
